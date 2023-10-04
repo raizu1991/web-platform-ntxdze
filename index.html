@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Prototype</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+
+    
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.3/dist/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="nav.js"></script>
+    <link
+    rel="stylesheet"
+    href="https://unpkg.com/bootstrap-table@1.16.0/dist/bootstrap-table.min.css"
+  />
+</script>
+<script src="https://unpkg.com/bootstrap-table@1.16.0/dist/bootstrap-table.min.js"></script>
+<script src="webrequest.js"></script>
+<script src="contact.js"></script>
+<script src="localrequest.js"></script>
+<script src="user.js"></script>
+<link
+    rel="stylesheet"
+    href="spinner.css"
+  /> 
+  
+  <style>
+  .navbar .action-form {
+    width: 280px;
+    padding: 20px;
+    left: auto;
+    right: 0;
+    font-size: 14px;
+  }
+  </style>
+</head>
+<body>
+<header  id="header">
+  <div class="jumbotron text-center" style="margin-bottom:0">
+    <h1>Prototype<b>2A</b></h1>
+    <p id="subtitle">HOME</p>
+  </div>
+  
+    <div class="overlay"></div>
+    <div class="spanner">
+      <div class="loader"></div>
+      <p>Connecting to server, please be patient.</p>
+    </div>
+</header>
+<nav id="nav" class="navbar navbar-expand-sm bg-dark navbar-dark">
+  <a class="navbar-brand" href="#welcome"onclick="nav_section('welcome')">Prototype<b> 2A</b></a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="collapsibleNavbar">
+    <ul class="navbar-nav">
+      <li class="nav-item">
+        <a class="nav-link" href="#about" onclick="nav_section('about')">About</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#news" onclick="nav_section('news')">News</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#contact" onclick="nav_section('contact')">Contact</a>
+      </li>    
+    </ul>
+    <div class="navbar-nav ml-auto action-buttons">
+			<div class="nav-item dropdown">
+				<a href="#" data-toggle="dropdown" class="btn btn-primary nav-link mr-4" aria-expanded="false">Sign in</a>
+                <div class="dropdown-menu action-form">
+					<div action="/examples/actions/confirmation.php" method="post">
+
+						<div class="form-group">
+							<input id="signin_username" type="text" class="form-control" placeholder="Username" required="required">
+						</div>
+						<div class="form-group">
+							<input id="signin_password" type="password" class="form-control" placeholder="Password" required="required">
+						</div>
+						<input onclick="user_signin()" class="btn btn-primary btn-block" value="Login">
+						<div class="text-center mt-2">
+							<a href="#">Forgot Your password?</a>
+						</div>
+					</div><!--form-->
+                </div>
+			</div>
+			<div class="nav-item dropdown">
+				<a href="#" data-toggle="dropdown" class="btn btn-outline-primary sign-up-btn" aria-expanded="false">Sign up</a>
+                <div class="dropdown-menu action-form">
+					<div action="/examples/actions/confirmation.php" method="post">
+						<p class="hint-text">Fill in this form to create your account!</p>
+						<div class="form-group">
+							<input type="text" id="signup_username" class="form-control" placeholder="Username" required="required">
+						</div>
+						<div class="form-group">
+							<input id="signup_password" type="password" class="form-control" placeholder="Password" required="required">
+						</div>
+						<div class="form-group">
+							<input id="signup_confirm_password" type="password" class="form-control" placeholder="Confirm Password" required="required">
+						</div>
+						<div class="form-group">
+							<label class="form-check-label"><input type="checkbox" required="required"> I accept the <a href="#">Terms &amp; Conditions</a></label>
+						</div>
+						<input  onclick="user_signup()" class="btn btn-primary btn-block" value="Sign up">
+					</div>
+				</div>
+			</div><!--form-->
+        </div>
+
+
+
+  </div> 
+
+</nav>
+<container  id="container">
+<div class="row">
+<aside  id="aside"   class="col-sm-4">
+<div id="sidemenu">
+<h3>Some Links</h3>
+  <p>Lorem ipsum dolor sit ame.</p>
+  <ul class="nav nav-pills flex-column">
+    <li class="nav-item">
+      <a class="nav-link active" href="#">Active</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="#">Link</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="#">Link</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link disabled" href="#">Disabled</a>
+    </li>
+  </ul>
+</div>
+</aside>
+<section  id="section" class="col-sm-8">
+ <div id="welcome">
+  <a name="welcome"><h2>Welcome</h2></a>
+  <h5>welcome to prototype</h5>
+  <div class="fakeimg">Fake Image</div>
+  <p>Some text..</p>
+  <p>Sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.</p>
+</div>
+<div id="about">
+  <a name="about"><h2>About</h2></a>
+  
+  <h5>this is about section</h5>
+
+<script>
+function insert_data(){
+//alert(1);
+$('#recipient-name').val('test');
+}
+function modal_sendmessage(){
+//alert(2);
+$('#exampleModal').modal('hide');
+}
+</script>
+
+
+
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo" onclick="insert_data()">Open modal for @mdo</button>
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" data-whatever="@fat">Open modal for @fat</button>
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" data-whatever="@getbootstrap">Open modal for @getbootstrap</button>
+
+
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">New message</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="form-group">
+            <label for="recipient-name" class="col-form-label">Recipient:</label>
+            <input type="text" class="form-control" id="recipient-name">
+          </div>
+          <div class="form-group">
+            <label for="message-text" class="col-form-label">Message:</label>
+            <textarea class="form-control" id="message-text"></textarea>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" onclick="modal_sendmessage()">Send message</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+</div>
+
+
+<div id="news">
+  <a name="news"><h2>News</h2></a>
+  <h1 class="text text-primary text-center">Geeks for Geeks</h1>
+<h6 class="text text-primary text-center">
+  A computer science portal for geeks
+</h6>
+<table class="table-striped border-success" id=table1>
+  <thead>
+    <tr>
+    <th data-field="userId">
+    <span class="text-default"> user Id </span>
+    </th>
+      <th data-field="id">
+        <span class="text-default"> Employee ID </span>
+      </th>
+      <th data-field="title">
+        <span class="text-default"> Employee Title </span>
+      </th>
+      <th data-field="body">
+        <span class="text-default"> Body </span>
+      </th>
+    </tr>
+  </thead>
+</table>
+</div>
+<div id="contact">
+  <a name="contact"><h2>Contact</h2></a>
+  <h5>Ring-Ring us</h5>
+    <div class="form-horizontal" action="" method="post">
+    <fieldset>
+      
+
+      <!-- Name input-->
+      <div class="form-group">
+        <label class="col-md-3 control-label" for="name">Name</label>
+        <div class="col-md-9">
+          <input id="contact_name" name="contact_name" type="text" placeholder="Your name" class="form-control">
+        </div>
+      </div>
+
+      <!-- Email input-->
+      <div class="form-group">
+        <label class="col-md-3 control-label" for="email">Your E-mail</label>
+        <div class="col-md-9">
+          <input id="contact_email" name="contact_email" type="text" placeholder="Your email" class="form-control">
+        </div>
+      </div>
+
+      <!-- Message body -->
+      <div class="form-group">
+        <label class="col-md-3 control-label" for="message">Your message</label>
+        <div class="col-md-9">
+          <textarea class="form-control" id="contact_message" name="contact_message" placeholder="Please enter your message here..." rows="5"></textarea>
+        </div>
+      </div>
+
+      <!-- Form actions -->
+      <div class="form-group">
+        <div class="col-md-12 text-right">
+          <button onclick="contact_sendmessage()" class="btn btn-primary btn-lg">Submit</button>
+        </div>
+      </div>
+    </fieldset>
+  </div>
+
+</div>
+</section>
+</div> 
+</container>
+<footer>
+<div class="jumbotron text-center" style="margin-bottom:0">
+  <p>Footer</p>
+</div>
+</footer  id="footer">
+
+
+</body>
+</html>
+
